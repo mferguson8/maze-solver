@@ -93,16 +93,32 @@ function solveMaze() {
     return false;
   }
 
+  // Call dfs function to solve the maze
   dfs(1, 1);
 
-  for (let y = 0; y < size; y++) {
-    for (let x = 0; x < size; x++) {
-      if (solution[y][x] === 1) {
-        const index = y * size + x;
-        mazeDiv.children[index].className = "solution";
-      }
+  // Highlight the correct path with a delay for visualization
+  const pathElements = mazeDiv.querySelectorAll(".path");
+  const delay = 100; // Milliseconds between highlighting each step
+
+  function highlightPathStep(step) {
+    if (step >= pathElements.length) {
+      return;
     }
+
+    const cell = pathElements[step];
+    const x = step % size;
+    const y = Math.floor(step / size);
+
+    if (solution[y][x] === 1) {
+      cell.classList.add("solution");
+    }
+
+    setTimeout(() => {
+      highlightPathStep(step + 1);
+    }, delay);
   }
+
+  highlightPathStep(0);
 }
 
 // Utility function to shuffle an array
