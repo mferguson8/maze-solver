@@ -41,6 +41,9 @@ function generateMaze() {
     }
   }
 
+  // Ensure entrance and exit are clear
+  maze[0][0] = 0;
+  maze[size - 1][size - 1] = 0;
   recursiveBacktracking(1, 1);
 
   for (let y = 0; y < size; y++) {
