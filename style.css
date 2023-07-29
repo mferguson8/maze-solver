@@ -10,7 +10,7 @@ body {
   display: grid;
   grid-template-columns: repeat(10, 50px);
   grid-template-rows: repeat(10, 50px);
-  gap: 1px;
+  gap: 5px;
   background-color: black;
 }
 
@@ -28,7 +28,7 @@ body {
 }
 
 .solution {
-  background-color: #00ff00;
+  background-color: red;
 }
 
 button {
