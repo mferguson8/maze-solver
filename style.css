@@ -34,3 +34,10 @@ body {
 button {
   margin-top: 20px;
 }
+.start {
+  background-color: blue;
+}
+
+.finish {
+  background-color: blue;
+}

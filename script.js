@@ -7,7 +7,6 @@ let solution = [];
 function initMaze() {
   maze = new Array(size).fill(null).map(() => new Array(size).fill(1));
 }
-
 // Generate the maze using recursive backtracking algorithm
 function generateMaze() {
   initMaze();
@@ -49,9 +48,27 @@ function generateMaze() {
   for (let y = 0; y < size; y++) {
     for (let x = 0; x < size; x++) {
       const cell = document.createElement("div");
-      cell.className = maze[y][x] ? "wall" : "path";
+      if (x === 0 && y === 0) {
+        cell.className = "start";
+      } else if (x === size - 1 && y === size - 1) {
+        cell.className = "finish";
+      } else {
+        cell.className = maze[y][x] ? "wall" : "path";
+      }
       mazeDiv.appendChild(cell);
     }
+  }
+}
+// Ensure entrance and exit are clear
+maze[0][0] = 0;
+maze[size - 1][size - 1] = 0;
+recursiveBacktracking(1, 1);
+
+for (let y = 0; y < size; y++) {
+  for (let x = 0; x < size; x++) {
+    const cell = document.createElement("div");
+    cell.className = maze[y][x] ? "wall" : "path";
+    mazeDiv.appendChild(cell);
   }
 }
 // Solve the maze using depth-first search algorithm
