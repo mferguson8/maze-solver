@@ -65,7 +65,14 @@ function solveMaze() {
   ];
 
   function dfs(x, y) {
-    if (x < 0 || x >= size || y < 0 || y >= size || maze[y][x] === 1 || solution[y][x] === 1) {
+    if (
+      x < 0 ||
+      x >= size ||
+      y < 0 ||
+      y >= size ||
+      maze[y][x] === 1 ||
+      solution[y][x] === 1
+    ) {
       return false;
     }
 
@@ -93,38 +100,37 @@ function solveMaze() {
     for (let x = 0; x < size; x++) {
       if (solution[y][x] === 1) {
         const index = y * size + x;
-        mazeDiv.children[index].classList.add('solution');
+        mazeDiv.children[index].classList.add("solution");
       }
     }
   }
 }
-  // Call dfs function to solve the maze
-  dfs(1, 1);
+// Call dfs function to solve the maze
+dfs(1, 1);
 
-  // Highlight the correct path with a delay for visualization
-  const pathElements = mazeDiv.querySelectorAll(".path");
-  const delay = 100; // Milliseconds between highlighting each step
+// Highlight the correct path with a delay for visualization
+const pathElements = mazeDiv.querySelectorAll(".path");
+const delay = 100; // Milliseconds between highlighting each step
 
-  function highlightPathStep(step) {
-    if (step >= pathElements.length) {
-      return;
-    }
-
-    const cell = pathElements[step];
-    const x = step % size;
-    const y = Math.floor(step / size);
-
-    if (solution[y][x] === 1) {
-      cell.classList.add("solution");
-    }
-
-    setTimeout(() => {
-      highlightPathStep(step + 1);
-    }, delay);
+function highlightPathStep(step) {
+  if (step >= pathElements.length) {
+    return;
   }
 
-  highlightPathStep(0);
+  const cell = pathElements[step];
+  const x = step % size;
+  const y = Math.floor(step / size);
+
+  if (solution[y][x] === 1) {
+    cell.classList.add("solution");
+  }
+
+  setTimeout(() => {
+    highlightPathStep(step + 1);
+  }, delay);
 }
+
+highlightPathStep(0);
 
 // Utility function to shuffle an array
 function shuffleArray(arr) {
