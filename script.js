@@ -54,7 +54,6 @@ function generateMaze() {
     }
   }
 }
-
 // Solve the maze using depth-first search algorithm
 function solveMaze() {
   solution = new Array(size).fill(null).map(() => new Array(size).fill(0));
@@ -66,14 +65,7 @@ function solveMaze() {
   ];
 
   function dfs(x, y) {
-    if (
-      x < 0 ||
-      x >= size ||
-      y < 0 ||
-      y >= size ||
-      maze[y][x] === 1 ||
-      solution[y][x] === 1
-    ) {
+    if (x < 0 || x >= size || y < 0 || y >= size || maze[y][x] === 1 || solution[y][x] === 1) {
       return false;
     }
 
@@ -93,6 +85,19 @@ function solveMaze() {
     return false;
   }
 
+  // Call dfs function to solve the maze
+  dfs(1, 1);
+
+  // Mark the correct path immediately
+  for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size; x++) {
+      if (solution[y][x] === 1) {
+        const index = y * size + x;
+        mazeDiv.children[index].classList.add('solution');
+      }
+    }
+  }
+}
   // Call dfs function to solve the maze
   dfs(1, 1);
 
